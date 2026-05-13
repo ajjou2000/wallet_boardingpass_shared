@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { FlightPass } from "@/components/FlightPass";
 import { buildFlightAwareUrl, getFlight } from "@/lib/flight/service";
+
+const SAMSUNG_WALLET_URL = "https://www.samsung.com/sec/apps/samsung-wallet/";
 
 interface PageProps {
   params: Promise<{ flightNumber: string }>;
@@ -30,6 +33,28 @@ export default async function FlightPage({ params }: PageProps) {
 
   return (
     <main className="mx-auto flex min-h-dvh max-w-md flex-col px-4 py-8 sm:py-12">
+      <header className="mb-6 flex flex-col items-center gap-2.5">
+        <a
+          href={SAMSUNG_WALLET_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Samsung Wallet 안내 페이지 열기"
+          className="inline-flex items-center justify-center rounded-2xl bg-white px-5 py-2.5 shadow-sm ring-1 ring-black/5 transition hover:bg-white/95 active:scale-[0.98]"
+        >
+          <Image
+            src="/samsung-wallet-logo.png"
+            alt="Samsung Wallet"
+            width={355}
+            height={66}
+            priority
+            className="h-6 w-auto sm:h-7"
+          />
+        </a>
+        <p className="text-[12px] text-wallet-mute">
+          Samsung Wallet에서 공유된 정보입니다
+        </p>
+      </header>
+
       <div className="mb-5 px-1">
         <p className="text-[11px] uppercase tracking-[0.2em] text-wallet-mute">
           마중 안내
